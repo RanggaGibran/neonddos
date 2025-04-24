@@ -1,0 +1,184 @@
+# Konfigurasi NeonDDoS Protection
+# Versi 1.0
+
+# Pengaturan monitoring koneksi
+connection:
+  # Jumlah maksimal koneksi dalam satu jendela waktu
+  threshold: 10
+  # Jendela waktu dalam milidetik (10000 = 10 detik)
+  timeWindow: 10000
+  # Durasi blokir sementara dalam milidetik (60000 = 1 menit)
+  blockDuration: 60000
+
+# Pengaturan deteksi serangan canggih
+detection:
+  # Threshold rate packet per detik
+  packetRateThreshold: 100
+  # Threshold burst koneksi per detik
+  connectionBurstThreshold: 5
+  # Threshold untuk pola koneksi mencurigakan
+  connectionPatternThreshold: 10
+  # Skor total untuk trigger alert
+  totalAttackScoreThreshold: 100
+  # Interval analisis dalam milidetik (30000 = 30 detik)
+  analysisInterval: 30000
+
+# Pengaturan firewall sistem
+firewall:
+  # Gunakan firewall sistem operasi (perlu ijin admin)
+  useSystemFirewall: false
+  # Notifikasi admin jika gagal mengakses firewall
+  notifyOnFailure: true
+  # Bersihkan aturan lama saat startup
+  cleanupOnStartup: true
+  # Maksimum IP yang bisa diblokir (untuk mencegah memori overload)
+  maxBlockedIps: 1000
+
+# Pengaturan notifikasi
+notifications:
+  # Level notifikasi (1=minimal, 2=standard, 3=detail)
+  level: 2
+  
+  # Notifikasi dalam game
+  ingame:
+    enabled: true
+  
+  # Notifikasi Discord via webhook
+  discord:
+    enabled: true
+    webhookUrl: "https://discord.com/api/webhooks/1364450086117183519/UlV3GcfmbK46zeK7Di8xXbvV0qzbmbO4G_024xibimnRy1qOb37WClD2bvyXmr7xEgPB"
+    username: "NeonDDoS Alert"
+    avatarUrl: "https://cdn.icon-icons.com/icons2/2699/PNG/512/minecraft_logo_icon_168974.png"
+  
+  # Notifikasi Email
+  email:
+    enabled: false
+    smtp:
+      host: "smtp.gmail.com"
+      port: 587
+      auth: true
+      startTLS: true
+    # Akun email untuk kirim notifikasi
+    username: ""
+    password: ""
+    # Email pengirim (kosongkan untuk menggunakan username)
+    from: ""
+    # Email penerima (bisa multiple, pisahkan dengan koma)
+    recipients: ""
+
+# Pesan sistem
+messages:
+  connection-blocked: "§cKoneksi kamu dibatasi karena terlalu banyak percobaan koneksi.\n§eCoba lagi dalam beberapa saat."
+
+# Pengaturan log dan pelaporan
+logging:
+  # Level detail log (1 = minimal, 3 = detail)
+  level: 2
+  # Aktifkan notifikasi admin
+  adminNotifications: true
+  # Simpan log ke file
+  saveToFile: true
+
+# Pengaturan sistem analitik
+analytics:
+  # Aktifkan machine learning untuk deteksi pola serangan
+  enableMachineLearning: true
+  # Simpan data analitik ke file database
+  saveAnalyticsData: true
+  # Threshold untuk deteksi anomali (dalam z-score)
+  anomalyThreshold: 3
+  # Minimal data points untuk analisis
+  minDataPointsForAnalysis: 10
+  # Threshold kecocokan pola (dalam persen)
+  patternMatchThreshold: 80
+
+# Pengaturan web dashboard
+dashboard:
+  # Aktifkan web dashboard
+  enabled: true
+  # Port untuk web server
+  port: 8080
+  # Bind address (0.0.0.0 untuk semua interface)
+  bindAddress: 0.0.0.0
+  # Username untuk login dashboard
+  username: admin
+  # Password hash (default: password)
+  password_hash: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+  # Salt untuk hashing password
+  salt: neonddos
+  # Timeout autentikasi (menit)
+  authTimeout: 30
+  # Mode debug
+  debug: false
+
+# Pengaturan Traffic Prioritization
+traffic-prioritization:
+  # Aktifkan sistem prioritas traffic
+  enabled: true
+  # Aktifkan alokasi bandwidth dinamis berdasarkan prioritas
+  dynamicBandwidthAllocation: true
+  # Maksimum request per detik untuk koneksi prioritas rendah
+  maxLowPriorityRequestsPerSecond: 20
+  # Maksimum koneksi total per detik
+  maxConnectionsPerSecond: 100
+  # Interval sinkronisasi prioritas dalam milidetik (5000 = 5 detik)
+  prioritySyncInterval: 5000
+  # Mode traffic saat server dalam tekanan (strict/balanced/permissive)
+  highLoadMode: balanced
+  # Minimum bandwidth allocation (persentase dari request) untuk player terverifikasi
+  minPlayerBandwidthPercent: 80
+
+# Pengaturan TCP Filter
+tcp-filter:
+  # Aktifkan TCP Connection Filter
+  enabled: true
+  # Maksimum SYN packets per detik dari satu IP
+  maxSynPerSecond: 5
+  # Maksimum koneksi half-open per IP
+  maxHalfOpenConnections: 20
+  # Gunakan SYN cookies untuk mitigasi SYN flood
+  enableSynCookies: true
+
+# Pengaturan GeoIP Filter
+geoip:
+  # Aktifkan filter berdasarkan negara
+  enabled: false
+  # Mode: false = blacklist (blokir negara tertentu), true = whitelist (hanya izinkan negara tertentu)
+  whitelist-mode: false
+  # Database path (kosongkan untuk gunakan internal)
+  database-path: ""
+
+# Pengaturan sistem caching
+cache:
+  # Aktifkan caching untuk mengurangi beban CPU saat diserang
+  enabled: true
+  # Ukuran maksimum cache dalam entries
+  max-size: 10000
+  # Waktu expiry dalam detik
+  ttl: 300
+
+# Pengaturan Connection Management
+connection-management:
+  # Timeout koneksi idle dalam milidetik
+  idle-timeout: 30000
+  # Maksimum koneksi per IP secara global
+  max-connections-per-ip: 5
+  # Interval pembatasan koneksi dalam milidetik
+  throttle-interval: 2000
+  # Menolak koneksi dengan User-Agent mencurigakan
+  filter-user-agents: true
+
+# Pengaturan Machine Learning
+machine-learning:
+  # Aktifkan machine learning untuk deteksi serangan
+  enabled: true
+  # Aktifkan penyesuaian threshold otomatis
+  adaptiveThresholds: true
+  # Interval training dalam menit
+  trainingIntervalMinutes: 30
+  # Minimal data points untuk training
+  minDataPointsForTraining: 100
+  # Threshold deteksi (0.0-1.0)
+  detectionThreshold: 0.75
+  # Direktori untuk menyimpan model
+  modelSaveDirectory: "models"

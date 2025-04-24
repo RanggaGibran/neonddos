@@ -1,0 +1,10 @@
+name: neonddos
+main: id.neonddos.neonddos
+version: ${project.version}
+api-version: 1.20
+description: Plugin anti-DDoS untuk melindungi server Minecraft
+commands:
+  neonddos:
+    description: Perintah utama untuk plugin NeonDDoS
+    usage: /neonddos <subcommand>
+    permission: neonddos.admin
