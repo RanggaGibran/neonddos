@@ -57,16 +57,19 @@ Command	Description
 /neonddos mltrain	Manually train ML models
 /neonddos toggleml	Enable/disable machine learning
 /neonddos testdiscord	Test Discord webhook notification
+
 Permissions
 Permission	Description
 neonddos.admin	Access to all NeonDDoS commands
 neonddos.notifications	Receive in-game attack notifications
+
 Setting Up Discord Notifications
 Create a webhook URL in your Discord server:
 Go to Server Settings > Integrations > Webhooks
 Create a new webhook and copy the URL
 Add the webhook URL to your config:
 Test with /neonddos testdiscord command
+
 Machine Learning System
 NeonDDoS includes a sophisticated machine learning system that learns from attack patterns over time:
 
